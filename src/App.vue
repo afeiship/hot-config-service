@@ -12,7 +12,8 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "webkit-sass-flexbox-grid/dist/webkit-sass-flexbox-grid.scss";
+@import './assets/styles/index.scss';
+
 .container {
   height: 100%;
   display: flex;

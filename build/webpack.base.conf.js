@@ -8,11 +8,11 @@ var MpvuePlugin = require('webpack-mpvue-asset-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var glob = require('glob')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-function getEntry (rootSrc, pattern) {
+function getEntry(rootSrc, pattern) {
   var files = glob.sync(path.resolve(rootSrc, pattern))
   return files.reduce((res, file) => {
     var info = path.parse(file)
@@ -45,7 +45,8 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue': 'mpvue',
-      'node_modules': resolve(__dirname, '../node_modules'),
+      'node_modules': resolve(__dirname, '..', 'node_modules'),
+      'assets': resolve(__dirname, '..', 'assets'),
       '@': resolve('src')
     },
     symlinks: false,
@@ -60,9 +61,17 @@ module.exports = {
         options: vueLoaderConfig
       },
       {
+        test: /\.css$/,
+        use: extractCss.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader']
+        })
+      },
+      {
         test: /\.scss$/,
         use: extractCss.extract({
-          use: ['postcss-loader', 'sass-loader']
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader', 'sass-loader']
         })
       },
       {

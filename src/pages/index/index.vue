@@ -14,6 +14,14 @@
         </div>
     </div>
 
+    <div class="rel actions" style="height:200px; width:100%;">
+      <button class="dib mr20">BTN1</button>
+      <button class="dib mr20">BTN2</button>
+      <button class="dib mr20">BTN2</button>
+      <button class="dib mr20">BTN2</button>
+      <button class="dib abs r0 b0">BTN3</button>
+    </div>
+
     <div class="usermotto">
       <div class="user-motto">
         <card :text="motto"></card>
