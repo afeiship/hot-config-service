@@ -1,3 +1,5 @@
+@import "node_modules/webkit-sass-mixins/dist/webkit-sass-mixins.scss";
+
 .blank-10{
   height:10rpx;
 }
@@ -8,8 +10,7 @@
   border:1px solid gold
 }
 image{
-  width: 80rpx;
-  height: 80rpx;
+  @include size(100rpx);
 }
 .circle{
   border-radius: 1000rpx;

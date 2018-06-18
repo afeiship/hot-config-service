@@ -15,6 +15,7 @@
     "weapp-sassui-short-name": "github:afeiship/weapp-sassui-short-name",
     "webkit-sass-flexbox-grid": "github:afeiship/webkit-sass-flexbox-grid",
     "webkit-sass-generators": "github:afeiship/webkit-sass-generators",
+    "webkit-sass-mixins": "github:afeiship/webkit-sass-mixins",
     "webkit-sassui-short-name": "github:afeiship/weapp-sassui-short-name"
   },
   "devDependencies": {
