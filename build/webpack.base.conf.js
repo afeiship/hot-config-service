@@ -46,6 +46,7 @@ module.exports = {
     alias: {
       'vue': 'mpvue',
       'node_modules': resolve(__dirname, '..', 'node_modules'),
+      'services': resolve(__dirname, '..', 'src/components/services'),
       'assets': resolve(__dirname, '..', 'assets'),
       '@': resolve('src')
     },

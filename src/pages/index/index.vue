@@ -15,6 +15,7 @@
     </div>
 
     <div class="rel actions" style="height:200px; width:100%;">
+      <button class="dib mr20" @click="fetch">HTTP</button>
       <button class="dib mr20">BTN1</button>
       <button class="dib mr20">BTN2</button>
       <button class="dib mr20">BTN2</button>
@@ -50,6 +51,9 @@ export default {
   },
 
   methods: {
+    fetch(){
+      console.log('fetch!');
+    },
     showNx() {
       const { VERSION } = nx;
       console.log(nx, VERSION);
