@@ -12,7 +12,7 @@ const Http = nx.declare({
       };
     },
     setResponseInterceptor: function (inMethod, inUrl, inData, inOptions) {
-      return inData.data;
+      return inData.data.data;
     },
     setRequestInterceptor: function (inMethod, inUrl, inData, inOptions) {
       return nx.param(inData);
