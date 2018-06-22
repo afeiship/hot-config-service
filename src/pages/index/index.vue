@@ -58,9 +58,9 @@ export default {
         username:'admin',
         password:'123123'
       }).then(resp=>{
-        console.log(resp, $store.gets());
         $store.set('login', resp);
-        console.log(resp, $store.gets());
+        const { login } = $store.gets();
+        console.log(login);
       });
     },
     showNx() {
