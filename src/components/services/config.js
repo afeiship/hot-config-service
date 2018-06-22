@@ -1,7 +1,7 @@
 export default class Config {
 
   static APIS = {
-    baseUrl: `//${location.host}`,
+    baseUrl: `http://192.168.1.238:8080`,
     items: {
       '/backend': {
         // global:

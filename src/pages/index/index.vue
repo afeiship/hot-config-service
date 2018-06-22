@@ -37,7 +37,8 @@
 </template>
 
 <script>
-import card from "@/components/card";
+import card from "#/views/card";
+import {$api} from '#';
 export default {
   data() {
     return {
@@ -53,6 +54,12 @@ export default {
   methods: {
     fetch(){
       console.log('fetch!');
+      $api.login({
+        username:'admin',
+        password:'123123'
+      }).then(resp=>{
+        console.log(resp);
+      });
     },
     showNx() {
       const { VERSION } = nx;

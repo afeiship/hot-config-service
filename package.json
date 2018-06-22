@@ -14,6 +14,7 @@
     "mpvue": "^1.0.11",
     "next-content-type": "github:afeiship/next-content-type",
     "next-js-core2": "github:afeiship/next-js-core2",
+    "next-param": "github:afeiship/next-param",
     "next-weapp-request": "github:afeiship/next-weapp-request",
     "weapp-sassui-short-name": "github:afeiship/weapp-sassui-short-name",
     "webkit-sass-flexbox-grid": "github:afeiship/webkit-sass-flexbox-grid",

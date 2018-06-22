@@ -45,10 +45,11 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue': 'mpvue',
-      'node_modules': resolve(__dirname, '..', 'node_modules'),
-      'services': resolve(__dirname, '..', 'src/components/services'),
-      'assets': resolve(__dirname, '..', 'assets'),
-      '@': resolve('src')
+      'node_modules': resolve('node_modules'),
+      '@': resolve('src'),
+      '#': resolve('src/components'),
+      'services': resolve('src/components/services'),
+      'assets': resolve('src/assets')
     },
     symlinks: false,
     aliasFields: ['mpvue', 'weapp', 'browser'],
