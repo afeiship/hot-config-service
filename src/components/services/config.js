@@ -1,5 +1,6 @@
 export default class Config {
 
+  static IMG_URL = 'http://testimg.treasurevision.cn';
   static APIS = {
     baseUrl: `http://192.168.1.238:8080`,
     items: {
@@ -11,6 +12,7 @@ export default class Config {
     }
   };
   static MONKEY_BUSY_MSG = '程序猿开紧张开发中...';
+
 }
 
 

@@ -38,7 +38,7 @@
 
 <script>
 import card from "#/views/card";
-import {$api, $store} from '#';
+import {$api, $store, $image} from '#';
 export default {
   data() {
     return {
@@ -65,7 +65,8 @@ export default {
     },
     showNx() {
       const { VERSION } = nx;
-      console.log(nx, VERSION);
+      console.log(nx, VERSION, $image.toImg);
+      console.log('IMG_URL:=>', $image.toImg('xxx.jpg'))
     },
     bindViewTap() {
       const url = "../logs/main";
