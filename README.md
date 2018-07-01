@@ -9,4 +9,4 @@
 - [x] $http/$api
 - [x] OPTIMIZE: optimzie dev/prod multipage entries script
 - [x] OPTIMIZE: clean before rebuild
-
+- [ ] BUG: Need manual modify main.js pages value
