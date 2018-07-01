@@ -1,31 +1,33 @@
-var path = require('path')
-var webpack = require('webpack')
-var fs = require('fs')
-var utils = require('./utils')
-var config = require('../config')
-var vueLoaderConfig = require('./vue-loader.conf')
-var MpvuePlugin = require('webpack-mpvue-asset-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var glob = require('glob')
+const path = require('path');
+const webpack = require('webpack');
+const fs = require('fs');
+const utils = require('./utils');
+const config = require('../config');
+const vueLoaderConfig = require('./vue-loader.conf');
+const MpvuePlugin = require('webpack-mpvue-asset-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const glob = require('glob');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
 function getEntry(rootSrc, pattern) {
-  var files = glob.sync(path.resolve(rootSrc, pattern))
+  const files = glob.sync(path.resolve(rootSrc, pattern));
   return files.reduce((res, file) => {
-    var info = path.parse(file)
-    var key = info.dir.slice(rootSrc.length + 1) + '/' + info.name
-    res[key] = path.resolve(file)
+    const info = path.parse(file);
+    const key = info.dir.slice(rootSrc.length + 1) + '/' + info.name;
+    res[key] = path.resolve(file);
     return res
   }, {})
 }
 
-const appEntry = { app: resolve('./src/main.js') }
-const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
-const entry = Object.assign({}, appEntry, pagesEntry)
+const appEntry = { app: resolve('./src/main.js') };
+const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js');
+const entry = Object.assign({}, appEntry, pagesEntry);
 const extractCss = new ExtractTextPlugin('styles/[name]-[hash].wxss');
+console.log('base entry!');
+console.log(entry);
 
 
 module.exports = {
