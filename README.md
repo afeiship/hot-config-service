@@ -5,6 +5,8 @@
 - [x] sass
 - [x] pre sass
 - [x] nx
-- [ ] rpx & px
-- [ ] mixin-decorator
-- [ ] $http/$api
+- [x] rpx & px
+- [x] $http/$api
+- [x] OPTIMIZE: optimzie dev/prod multipage entries script
+- [x] OPTIMIZE: clean before rebuild
+
