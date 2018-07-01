@@ -1,34 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
-const fs = require('fs');
 const utils = require('./utils');
 const config = require('../config');
+const mpConfig = require('../mp_config.json');
 const vueLoaderConfig = require('./vue-loader.conf');
 const MpvuePlugin = require('webpack-mpvue-asset-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const glob = require('glob');
+const webpackEntries = require('webpack-entries');
+const env = process.env.NODE_ENV;
+const nxMapKey = require('next-map-key');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-function getEntry(rootSrc, pattern) {
-  const files = glob.sync(path.resolve(rootSrc, pattern));
-  return files.reduce((res, file) => {
-    const info = path.parse(file);
-    const key = info.dir.slice(rootSrc.length + 1) + '/' + info.name;
-    res[key] = path.resolve(file);
-    return res
-  }, {})
-}
 
-const appEntry = { app: resolve('./src/main.js') };
-const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js');
+const appEntry = {app: resolve('./src/main.js')};
+const pagesEntry = nxMapKey(webpackEntries(mpConfig[env].entries), key => key.slice(4));
 const entry = Object.assign({}, appEntry, pagesEntry);
 const extractCss = new ExtractTextPlugin('styles/[name]-[hash].wxss');
-console.log('base entry!');
-console.log(entry);
-
 
 module.exports = {
   // 如果要自定义生成的 dist 目录里面的文件路径，
@@ -124,4 +114,4 @@ module.exports = {
     }),
     new MpvuePlugin()
   ]
-}
+};
