@@ -8,7 +8,7 @@ const MpvuePlugin = require('webpack-mpvue-asset-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpackEntries = require('webpack-entries');
 const env = process.env.NODE_ENV;
-const nxMapKey = require('next-map-key');
+const nxMapMap = require('next-map-map');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
@@ -16,7 +16,12 @@ function resolve(dir) {
 
 
 const appEntry = {app: resolve('./src/main.js')};
-const pagesEntry = nxMapKey(webpackEntries(mpConfig[env].entries), key => key.slice(4));
+const pagesEntry = nxMapMap(webpackEntries(mpConfig[env].entries), (key, value) => {
+  return {
+    key: key.slice(4),
+    value: resolve(value)
+  }
+});
 const entry = Object.assign({}, appEntry, pagesEntry);
 const extractCss = new ExtractTextPlugin('styles/[name]-[hash].wxss');
 

@@ -2,9 +2,16 @@
   "development": {
     "entries": [
       "src/pages/index/main.js"
+    ],
+    "pages": [
+      "^pages/index/main"
     ]
   },
   "production": {
-    "entries": "src/pages/**/main.js"
+    "entries": "src/pages/**/main.js",
+    "pages": [
+      "^pages/index/main",
+      "pages/logs/main"
+    ]
   }
 }
