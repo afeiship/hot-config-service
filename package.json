@@ -49,7 +49,6 @@
     "mpvue-template-compiler": "^1.0.11",
     "mpvue-webpack-target": "^1.0.0",
     "next-map-key": "github:afeiship/next-map-key",
-    "next-map-map": "github:afeiship/next-map-map",
     "node-sass": "^4.9.0",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^2.0.0",

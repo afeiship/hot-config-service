@@ -2,26 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 const utils = require('./utils');
 const config = require('../config');
-const mpConfig = require('../mp_config.json');
 const vueLoaderConfig = require('./vue-loader.conf');
 const MpvuePlugin = require('webpack-mpvue-asset-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpackEntries = require('webpack-entries');
-const env = process.env.NODE_ENV;
-const nxMapMap = require('next-map-map');
+const nxMapKey = require('next-map-key');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-
 const appEntry = {app: resolve('./src/main.js')};
-const pagesEntry = nxMapMap(webpackEntries(mpConfig[env].entries), (key, value) => {
-  return {
-    key: key.slice(4),
-    value: resolve(value)
-  }
-});
+const pagesEntry = nxMapKey(webpackEntries('src/pages/**/main.js'), key => key.slice(4));
 const entry = Object.assign({}, appEntry, pagesEntry);
 const extractCss = new ExtractTextPlugin('styles/[name]-[hash].wxss');
 
