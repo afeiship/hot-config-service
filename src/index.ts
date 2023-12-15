@@ -3,7 +3,7 @@ import nx from '@jswork/next';
 interface Options {
   envs: Record<string, string>;
   env: string;
-  namespace: string;
+  subpath?: string;
   timeout?: number;
 }
 
@@ -25,8 +25,8 @@ class HotConfigService {
   }
 
   async init() {
-    const { envs, env, timeout, namespace } = this.options;
-    const apiURL = envs[env] + `/${namespace}`;
+    const { envs, env, timeout, subpath } = this.options;
+    const apiURL = envs[env] + `/${subpath}`;
     try {
       const res = await fetch(apiURL).then((r) => r.json());
       if (res.success) {

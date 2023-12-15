@@ -4,7 +4,7 @@ const hotConfig = new HotConfig({
   envs: {
     beta: 'https://student-api.beta.saybot.net/api/v2/configurations',
   },
-  namespace: 'HOMEWORK_NG_WEB',
+  subpath: 'HOMEWORK_NG_WEB',
   env: 'beta',
 });
 
