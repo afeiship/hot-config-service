@@ -13,9 +13,25 @@ npm install @jswork/hot-config-service
 
 ## usage
 ```js
-import hotConfigService from '@jswork/hot-config-service';
+import HotConfigService from '@jswork/hot-config-service';
 
-// usage goes here.
+const hotConfig = new HotConfigService({
+  envs: {
+    'beta': 'https://student-api.beta.saybot.net',
+    'production': 'https://student-api.alo7.com'
+  },
+  env: 'beta',
+  subpath: '/api/v2/configurations/'
+});
+
+// setOptions
+hotConfig.setOptions({ env: 'production' });
+
+// init
+await hotConfig.init();
+
+// get value
+hostConfig.get('env');
 ```
 
 ## types
