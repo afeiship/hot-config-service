@@ -25,8 +25,8 @@ class HotConfigService {
   }
 
   /**
-  @template: should implement this method.
-  @description: set the configuration.
+    @template: should implement this method.
+    @description: set the configuration.
   */
   setDataAsConfig(inData) {
     this.configuration = inData as Configuration;
