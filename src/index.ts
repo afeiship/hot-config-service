@@ -25,6 +25,14 @@ class HotConfigService {
   }
 
   /**
+  @template: should implement this method.
+  @description: set the configuration.
+  */
+  setDataAsConfig(inData) {
+    this.configuration = inData as Configuration;
+  }
+
+  /**
     @template: should implement this method.
     @description: init the configuration.
   */
@@ -33,7 +41,7 @@ class HotConfigService {
     const apiURL = envs[env] + `/${subpath}`;
     try {
       const res = await fetch(apiURL).then((r) => r.json());
-      this.configuration = nx.get(res, 'data.info') as Configuration;
+      this.setDataAsConfig(res);
     } catch (e) {
       console.error('HotConfigService: ', e);
       this.configuration = null;
