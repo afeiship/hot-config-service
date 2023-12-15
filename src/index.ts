@@ -35,14 +35,13 @@ class HotConfigService {
       const res = await fetch(apiURL).then((r) => r.json());
       this.configuration = nx.get(res, 'data.info') as Configuration;
     } catch (e) {
-      console.error('e: ', e);
+      console.error('HotConfigService: ', e);
       this.configuration = null;
     }
   }
 
   get(inPath?: string) {
     const ctx = this.configuration;
-    console.log('path-ctx: ', ctx);
     if (!inPath || !ctx) return ctx;
     return nx.get(ctx, inPath);
   }
