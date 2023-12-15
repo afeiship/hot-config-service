@@ -24,14 +24,16 @@ class HotConfigService {
     };
   }
 
+  /**
+    @template: should implement this method.
+    @description: init the configuration.
+  */
   async init() {
     const { envs, env, timeout, subpath } = this.options;
     const apiURL = envs[env] + `/${subpath}`;
     try {
       const res = await fetch(apiURL).then((r) => r.json());
-      if (res.success) {
-        this.configuration = nx.get(res, 'data.info') as Configuration;
-      }
+      this.configuration = nx.get(res, 'data.info') as Configuration;
     } catch (e) {
       console.error('e: ', e);
       this.configuration = null;
