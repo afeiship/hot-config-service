@@ -1,5 +1,23 @@
-const hotConfigService = (): void => {
-  console.log('hello');
-};
+interface Options {
+  envs: Record<string, string>;
+  env: string;
+  timeout: number;
+}
 
-export default hotConfigService;
+interface Configuration {}
+
+class HotConfigService {
+  public options: Options;
+  public configuration: Configuration = {};
+
+  constructor(inOptions: Options) {
+    this.options = inOptions;
+  }
+
+  async init() {
+    const { envs, env, timeout } = this.options;
+    const apiURL = envs[env];
+  }
+}
+
+export default HotConfigService;
