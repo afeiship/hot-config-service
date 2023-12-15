@@ -6,12 +6,12 @@ export default defineConfig({
   splitting: true,
   cjsInterop: true,
   // globalName: 'i18nHelper',
-  // external: ['react'],
+  external: ['@jswork/next'],
   dts: true,
   sourcemap: true,
   outExtension({ format }) {
     return {
       js: `.${format}.js`,
     };
-  }
+  },
 });
