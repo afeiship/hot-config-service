@@ -1,14 +1,14 @@
-.DS_Store
-node_modules/
-dist/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+node_modules
+bower_components
+coverage
+npm-debug.log
+yarn.lock
 package-lock.json
-
-# Editor directories and files
+pnpm-lock.yaml
+.DS_Store
 .idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
+.vscode
+dist
+
+.tmp
+docs
