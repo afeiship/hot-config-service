@@ -35,11 +35,7 @@ class HotConfigService {
     this.configuration = inData as Configuration;
   }
 
-  /**
-    @template: should implement this method.
-    @description: init the configuration.
-  */
-  async init() {
+  async fetch() {
     const { envs, env, timeout, subpath } = this.options;
     const apiURL = envs[env] + subpath;
     try {
