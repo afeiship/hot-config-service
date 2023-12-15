@@ -27,8 +27,8 @@ const hotConfig = new HotConfigService({
 // setOptions
 hotConfig.setOptions({ env: 'production' });
 
-// init
-await hotConfig.init();
+// fetch
+await hotConfig.fetch();
 
 // get value
 hostConfig.get('env');
