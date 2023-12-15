@@ -1,3 +1,1 @@
-interface NxStatic {
-  $say: (msg: string) => void;
-}
+interface NxStatic {}
