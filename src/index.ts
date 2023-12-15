@@ -15,7 +15,10 @@ class HotConfigService {
 
   constructor(inOptions: Options) {
     this.options = inOptions;
+    this.init();
   }
+
+  init() {}
 
   setOptions(inOptions) {
     this.options = {
@@ -38,7 +41,7 @@ class HotConfigService {
   */
   async init() {
     const { envs, env, timeout, subpath } = this.options;
-    const apiURL = envs[env] + `/${subpath}`;
+    const apiURL = envs[env] + subpath;
     try {
       const res = await fetch(apiURL).then((r) => r.json());
       this.setDataAsConfig(res);
