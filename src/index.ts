@@ -1,50 +1,53 @@
 import nx from '@jswork/next';
 
+type Configuration = Record<string, any> | null | undefined;
+
 interface Options {
   envs: Record<string, string>;
   env: string;
   subpath?: string;
   timeout?: number;
+  fallback?: Configuration;
 }
 
-type Configuration = Record<string, any> | null;
+const defaults: Partial<Options> = {
+  timeout: 5000,
+  fallback: {},
+};
 
 class HotConfigService {
   public options: Options;
   public configuration: Configuration = {};
 
   constructor(inOptions: Options) {
-    this.options = inOptions;
+    this.options = { ...defaults, ...inOptions };
     this.init();
   }
 
   init() {}
 
-  setOptions(inOptions) {
-    this.options = {
-      ...this.options,
-      ...inOptions,
-    };
-  }
-
-  /**
-    @template: should implement this method.
-    @description: set the configuration.
-  */
-  setDataAsConfig(inData) {
-    this.configuration = inData as Configuration;
+  async transformResponse(inResponse: Response) {
+    const { status, ok } = inResponse;
+    if (status !== 200 || !ok) return this.options.fallback;
+    const res = await inResponse.json();
+    return res as Configuration;
   }
 
   async fetch() {
-    const { envs, env, timeout, subpath } = this.options;
+    const { envs, env, fallback, timeout, subpath } = this.options;
     const apiURL = envs[env] + subpath;
+    const abortController = new AbortController();
+    setTimeout(() => abortController.abort(), timeout);
+
     try {
-      const res = await fetch(apiURL).then((r) => r.json());
-      this.setDataAsConfig(res);
+      const {signal} = abortController;
+      const res = await fetch(apiURL, { signal });
+      this.configuration = await this.transformResponse(res);
     } catch (e) {
       console.error('HotConfigService: ', e);
-      this.configuration = null;
+      this.configuration = fallback;
     }
+    return this.configuration;
   }
 
   get(inPath?: string) {

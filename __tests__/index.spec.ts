@@ -10,7 +10,7 @@ const hotConfig = new HotConfig({
 
 describe('api.basic', () => {
   test('normail single value case', async () => {
-    await hotConfig.init();
+    await hotConfig.fetch();
     const res = hotConfig.get();
     console.log('res: ', res);
   });
