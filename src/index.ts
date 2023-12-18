@@ -5,7 +5,7 @@ type Configuration = Record<string, any> | null | undefined;
 interface Options {
   envs: Record<string, string>;
   env: string;
-  subpath?: string;
+  path?: string;
   timeout?: number;
   fallback?: Configuration;
 }
@@ -34,13 +34,13 @@ class HotConfigService {
   }
 
   async fetch() {
-    const { envs, env, fallback, timeout, subpath } = this.options;
-    const apiURL = envs[env] + subpath;
+    const { envs, env, fallback, timeout, path } = this.options;
+    const apiURL = envs[env] + path;
     const abortController = new AbortController();
     setTimeout(() => abortController.abort(), timeout);
 
     try {
-      const {signal} = abortController;
+      const { signal } = abortController;
       const res = await fetch(apiURL, { signal });
       this.configuration = await this.transformResponse(res);
     } catch (e) {
