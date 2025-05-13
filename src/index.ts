@@ -1,4 +1,4 @@
-import nx from '@jswork/next';
+import obp from 'object-path';;
 
 type Configuration = Record<string, any> | null | undefined;
 
@@ -53,7 +53,7 @@ class HotConfigService {
   get(inPath?: string) {
     const ctx = this.configuration;
     if (!inPath || !ctx) return ctx;
-    return nx.get(ctx, inPath);
+    return obp.get(ctx, inPath);
   }
 }
 

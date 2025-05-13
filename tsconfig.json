@@ -13,7 +13,6 @@
     "noImplicitAny": false
   },
   "include": [
-    "src",
-    "global.d.ts"
+    "src"
   ]
 }
