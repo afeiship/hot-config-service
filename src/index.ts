@@ -3,6 +3,9 @@ import wxFetch from 'wxapp-fetch';
 
 type Configuration = Record<string, any> | null | undefined;
 
+// declare wx
+declare var wx: any;
+
 interface Options {
   envs: Record<string, string>;
   env: string;
@@ -37,16 +40,28 @@ class HotConfigService {
   async fetch() {
     const { envs, env, fallback, timeout, path } = this.options;
     const apiURL = envs[env] + path;
-    const abortController = new AbortController();
-    setTimeout(() => abortController.abort(), timeout);
+    const isMpEnv =
+      typeof wx !== 'undefined' && typeof wx.getSystemInfoSync().platform === 'string';
+    if (isMpEnv) {
+      try {
+        const res = await wxFetch(apiURL);
+        this.configuration = await this.transformResponse(res);
+      } catch (e) {
+        console.error('HotConfigService: ', e);
+        this.configuration = fallback;
+      }
+    } else {
+      const abortController = new AbortController();
+      setTimeout(() => abortController.abort(), timeout);
 
-    try {
-      const { signal } = abortController;
-      const res = await wxFetch(apiURL, { signal });
-      this.configuration = await this.transformResponse(res);
-    } catch (e) {
-      console.error('HotConfigService: ', e);
-      this.configuration = fallback;
+      try {
+        const { signal } = abortController;
+        const res = await wxFetch(apiURL, { signal });
+        this.configuration = await this.transformResponse(res);
+      } catch (e) {
+        console.error('HotConfigService: ', e);
+        this.configuration = fallback;
+      }
     }
     return this.configuration;
   }
