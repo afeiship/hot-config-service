@@ -1,4 +1,5 @@
 import obp from 'object-path';
+import wxFetch from 'wxapp-fetch';
 
 type Configuration = Record<string, any> | null | undefined;
 
@@ -8,13 +9,11 @@ interface Options {
   path?: string;
   timeout?: number;
   fallback?: Configuration;
-  fetch?: (url, options) => Promise<any>;
 }
 
 const defaults: Partial<Options> = {
   timeout: 5000,
   fallback: {},
-  fetch: typeof fetch === 'function' ? fetch : undefined,
 };
 
 class HotConfigService {
@@ -43,7 +42,7 @@ class HotConfigService {
 
     try {
       const { signal } = abortController;
-      const res = await this.options.fetch!(apiURL, { signal });
+      const res = await wxFetch(apiURL, { signal });
       this.configuration = await this.transformResponse(res);
     } catch (e) {
       console.error('HotConfigService: ', e);
