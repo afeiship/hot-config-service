@@ -22,7 +22,15 @@ const defaults: Partial<Options> = {
 
 const fetchJson = async (url: string, options: any) => {
   const isMp = typeof wx !== 'undefined' && typeof wx.getSystemInfoSync !== 'undefined';
-  return isMp ? fetchMp(url, options) : fetchWithTimeout(url, options);
+  const returnJson = (r) =>
+    r.json().catch((err) => {
+      console.error('Failed to parse response as JSON:', err);
+      throw err;
+    });
+
+  return isMp
+    ? fetchMp(url, options).then(returnJson)
+    : fetchWithTimeout(url, options).then(returnJson);
 };
 
 class HotConfigService {
