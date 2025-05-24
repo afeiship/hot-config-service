@@ -34,7 +34,10 @@ class HotConfigService {
   }
 
   private async fetchJson(url: string, options: { timeout?: number }): Promise<any> {
-    const isMp = typeof wx !== 'undefined' && typeof wx.getSystemInfoSync !== 'undefined';
+    const isWxEnv = typeof wx !== 'undefined' && typeof wx.getSystemInfoSync !== 'undefined';
+    const systemInfo = wx.getSystemInfoSync();
+    const isMp = isWxEnv && typeof systemInfo.platform === 'string';
+
     const returnJson = (r: Response) =>
       r.json().catch((err) => {
         console.error('Failed to parse response as JSON:', err);
