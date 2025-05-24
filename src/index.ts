@@ -58,7 +58,7 @@ class HotConfigService {
       const res = await fetchJson(apiURL, { timeout });
       this.configuration = await this.transformResponse(res);
     } catch (e) {
-      console.error('HotConfigService: ', e);
+      console.error('Failed to fetch configuration from ' + apiURL, e);
       this.configuration = fallback;
     }
     return this.configuration;
