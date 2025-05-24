@@ -55,19 +55,12 @@ class HotConfigService {
 
     try {
       const res = await this.fetchJson(apiURL, { timeout });
-      this.configuration = await this.transformResponse(res);
+      this.configuration = !res ? this.options.fallback : (res as Configuration);
     } catch (e) {
       const error = e instanceof Error ? e : new Error(String(e));
       throw new ConfigurationError(`Failed to fetch configuration from ${apiURL}`, error);
     }
     return this.configuration;
-  }
-
-  async transformResponse(inResponse: Response) {
-    const { status, ok } = inResponse;
-    if (status !== 200 || !ok) return this.options.fallback;
-    const res = await inResponse.json();
-    return res as Configuration;
   }
 
   get(inPath?: string) {
