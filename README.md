@@ -8,7 +8,7 @@
 
 ## installation
 ```shell
-npm install @jswork/hot-config-service
+yarn add @jswork/hot-config-service
 ```
 
 ## usage
@@ -16,22 +16,29 @@ npm install @jswork/hot-config-service
 import HotConfigService from '@jswork/hot-config-service';
 
 const hotConfig = new HotConfigService({
+  // 环境配置，可以设置多个环境的API地址
   envs: {
     'beta': 'https://student-api.beta.saybot.net',
     'production': 'https://student-api.alo7.com'
   },
+  // 当前环境
   env: 'beta',
-  subpath: '/api/v2/configurations/'
+  // API路径，可选，默认为空
+  path: '/api/v2/configurations/',
+  // 请求超时时间，可选，默认为30秒
+  timeout: 30000,
+  // 当请求失败时的默认配置，可选
+  fallback: {}
 });
 
-// setOptions
-hotConfig.setOptions({ env: 'production' });
-
-// fetch
+// 获取配置
 await hotConfig.fetch();
 
-// get value
-hostConfig.get('env');
+// 获取整个配置对象
+const config = hotConfig.get();
+
+// 获取特定路径的配置值
+const value = hotConfig.get('some.nested.key');
 ```
 
 ## types
