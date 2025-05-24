@@ -1,5 +1,6 @@
 import obp from 'object-path';
-import wxFetch from 'wxapp-fetch';
+import fetchMp from '@jswork/fetch-mp';
+import fetchWithTimeout from '@jswork/fetch-with-timeout';
 
 type Configuration = Record<string, any> | null | undefined;
 
@@ -15,8 +16,16 @@ interface Options {
 }
 
 const defaults: Partial<Options> = {
-  timeout: 5000,
+  timeout: 30 * 1000,
   fallback: {},
+};
+
+const fetchJson = async (url: string, options: any) => {
+  const isMiniProgram = typeof wx !== 'undefined' && typeof wx.getSystemInfoSync !== 'undefined';
+  if (isMiniProgram) {
+    return fetchMp(url, options);
+  }
+  return fetchWithTimeout(url, options);
 };
 
 class HotConfigService {
@@ -40,28 +49,12 @@ class HotConfigService {
   async fetch() {
     const { envs, env, fallback, timeout, path } = this.options;
     const apiURL = envs[env] + path;
-    const isMpEnv =
-      typeof wx !== 'undefined' && typeof wx.getSystemInfoSync().platform === 'string';
-    if (isMpEnv) {
-      try {
-        const res = await wxFetch(apiURL);
-        this.configuration = await this.transformResponse(res);
-      } catch (e) {
-        console.error('HotConfigService: ', e);
-        this.configuration = fallback;
-      }
-    } else {
-      const abortController = new AbortController();
-      setTimeout(() => abortController.abort(), timeout);
-
-      try {
-        const { signal } = abortController;
-        const res = await wxFetch(apiURL, { signal });
-        this.configuration = await this.transformResponse(res);
-      } catch (e) {
-        console.error('HotConfigService: ', e);
-        this.configuration = fallback;
-      }
+    try {
+      const res = await fetchJson(apiURL, { timeout });
+      this.configuration = await this.transformResponse(res);
+    } catch (e) {
+      console.error('HotConfigService: ', e);
+      this.configuration = fallback;
     }
     return this.configuration;
   }
