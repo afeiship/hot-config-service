@@ -41,11 +41,6 @@ const config = hotConfig.get();
 const value = hotConfig.get('some.nested.key');
 ```
 
-## types
-```ts
-/// <reference types="@jswork/hot-config-service/global.d.ts" />
-```
-
 ## license
 Code released under [the MIT license](https://github.com/afeiship/hot-config-service/blob/master/LICENSE.txt).
 
