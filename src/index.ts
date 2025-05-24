@@ -21,8 +21,8 @@ const defaults: Partial<Options> = {
 };
 
 const fetchJson = async (url: string, options: any) => {
-  const isMiniProgram = typeof wx !== 'undefined' && typeof wx.getSystemInfoSync !== 'undefined';
-  return isMiniProgram ? fetchMp(url, options) : fetchWithTimeout(url, options);
+  const isMp = typeof wx !== 'undefined' && typeof wx.getSystemInfoSync !== 'undefined';
+  return isMp ? fetchMp(url, options) : fetchWithTimeout(url, options);
 };
 
 class HotConfigService {
