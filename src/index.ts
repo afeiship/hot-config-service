@@ -35,8 +35,7 @@ class HotConfigService {
 
   private async fetchJson(url: string, options: { timeout?: number }): Promise<any> {
     const isWxEnv = typeof wx !== 'undefined' && typeof wx.getSystemInfoSync !== 'undefined';
-    const systemInfo = wx.getSystemInfoSync();
-    const isMp = isWxEnv && typeof systemInfo.platform === 'string';
+    const isMp = isWxEnv && typeof wx.getSystemInfoSync().platform === 'string';
 
     const returnJson = (r: Response) =>
       r.json().catch((err) => {
