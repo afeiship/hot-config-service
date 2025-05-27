@@ -50,7 +50,7 @@ class HotConfigService {
 
   async fetch() {
     const { envs, env, timeout, path } = this.options;
-    const apiURL = envs[env] + (path || '');
+    const apiURL = envs[env] + (path ?? '');
 
     try {
       const res = await this.fetchJson(apiURL, { timeout });

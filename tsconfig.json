@@ -8,11 +8,23 @@
     "pretty": true,
     "esModuleInterop": true,
     "skipDefaultLibCheck": true,
-    "module": "es2015",
-    "moduleResolution": "node",
-    "noImplicitAny": false
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "noImplicitAny": false,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2015",
+      "ES2015.Promise"
+    ],
+    "types": [
+      "jest",
+      "node"
+    ]
   },
   "include": [
-    "src"
+    "src",
+    "node_modules/@types",
+    "node_modules/@jswork"
   ]
 }

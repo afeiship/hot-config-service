@@ -1,17 +1,42 @@
-import { defineConfig } from 'tsup';
+import { defineConfig, Options } from 'tsup';
+import tsupBanner from '@jswork/tsup-banner';
+import { umdWrapper } from 'esbuild-plugin-umd-wrapper';
+import { replace } from 'esbuild-plugin-replace';
 
-export default defineConfig({
-  entry: ['src/*.ts'],
-  format: ['cjs', 'esm' /*'iife' */],
-  splitting: true,
-  cjsInterop: true,
-  // globalName: 'i18nHelper',
-  external: ['@jswork/next'],
+const baseOptions: Options = {
+  entry: ['src/index.ts'],
+  clean: true,
+  format: ['cjs', 'esm'],
+  tsconfig: './tsconfig.json',
   dts: true,
   sourcemap: true,
+  cjsInterop: true,
+  // external: ['react', 'react-dom'],
+  banner: {
+    js: tsupBanner(),
+  },
   outExtension({ format }) {
     return {
       js: `.${format}.js`,
     };
   },
-});
+};
+
+export default defineConfig([
+  {
+    ...baseOptions,
+    splitting: true,
+  },
+  {
+    ...baseOptions,
+    format: ['umd'] as any,
+    esbuildPlugins: [
+      replace({
+        'export default': 'export =',
+      }),
+      umdWrapper({
+        libraryName: 'HotConfigService',
+      }),
+    ],
+  }
+]);

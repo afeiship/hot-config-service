@@ -1,0 +1,14 @@
+name: replace-in-files
+files:
+  - "src/**/*.ts"
+  - ".*"
+  - "*"
+  - "!node_modules"
+  - "!rif.config.yaml"
+replacements:
+  - from: /typescript-tsup-library-description/g
+    to: A lightweight JavaScript class for dynamic configurations.
+  - from: /typescript-tsup-library/g
+    to: ${PROJECT_NAME}
+  - from: /tsupLibrary/g
+    to: HotConfigService

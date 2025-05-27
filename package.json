@@ -2,9 +2,15 @@
   "name": "@jswork/hot-config-service",
   "version": "1.0.12",
   "description": "A lightweight JavaScript class for dynamic configurations.",
+  "npmClient": "pnpm",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "prettier": "@jswork/style-guide/prettier",
   "scripts": {
     "build": "tsup",
     "test": "bun test",
@@ -12,11 +18,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@jswork/next": "^1.2.13",
-    "@swc/core": "^1.3.93",
-    "@types/jest": "^29.5.0",
-    "@types/node": "^18.15.5",
-    "tsup": "^7.2.0",
+    "@jswork/style-guide": "^1.0.3",
+    "@jswork/tsup-banner": "^1.0.4",
+    "@swc/core": "^1.5.5",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.11",
+    "esbuild-plugin-replace": "^1.4.0",
+    "esbuild-plugin-umd-wrapper": "^3.0.0",
+    "prettier": "^3.3.3",
+    "tsup": "^8.2.4",
     "typescript": "^4.9.5"
   },
   "publishConfig": {
@@ -28,9 +38,10 @@
     "@jswork/fetch-with-timeout": "^1.0.1",
     "object-path": "0.11.0"
   },
+  "homepage": "https://js.work",
   "keywords": [
-    "config",
-    "hot",
-    "service"
+    "hot-config-service",
+    "number",
+    "num"
   ]
 }
