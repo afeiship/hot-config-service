@@ -19,7 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "@jswork/style-guide": "^1.0.3",
-    "@jswork/tsup-banner": "^1.0.4",
+    "@jswork/tsup-banner": "^1.0.13",
     "@swc/core": "^1.5.5",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.11",
@@ -34,8 +34,8 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "@jswork/fetch-mp": "^1.0.3",
-    "@jswork/fetch-with-timeout": "^1.0.1",
+    "@jswork/fetch-mp": "^1.0.5",
+    "@jswork/fetch-with-timeout": "^1.0.2",
     "object-path": "0.11.0"
   },
   "homepage": "https://js.work",
